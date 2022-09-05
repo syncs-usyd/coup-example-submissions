@@ -10,7 +10,7 @@ is_last_counter_block_as_cap = True
 
 
 def get_next_alive_player():
-    next_alive = (bot_battle.player_id + 1) % 5
+    next_alive = (game_info.player_id + 1) % 5
     while game_info.players_cards_num[next_alive] == 0:
         next_alive = (next_alive + 1) % 5
     
@@ -38,7 +38,7 @@ def move_controller(requested_move: RequestedMove):
 
 
 def primary_action_handler():
-    if game_info.balances[bot_battle.player_id] >= 7:
+    if game_info.balances[game_info.player_id] >= 7:
         target_player_id = get_next_alive_player()
         bot_battle.play_primary_action(PrimaryAction.Coup, target_player_id)
     else:

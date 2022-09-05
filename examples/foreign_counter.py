@@ -10,7 +10,7 @@ bot_battle = BotBattle()
 
 
 def get_next_alive_player():
-    next_alive = (bot_battle.player_id + 1) % 5
+    next_alive = (game_info.player_id + 1) % 5
     while game_info.players_cards_num[next_alive] == 0:
         next_alive = (next_alive + 1) % 5
     
@@ -38,7 +38,7 @@ def move_controller(requested_move: RequestedMove):
 
 
 def primary_action_handler():
-    if game_info.balances[bot_battle.player_id] >= 7:
+    if game_info.balances[game_info.player_id] >= 7:
         target_player_id = get_next_alive_player()
         bot_battle.play_primary_action(PrimaryAction.Coup, target_player_id)
     else:
@@ -70,7 +70,6 @@ def discard_choice_handler():
 
 
 if __name__ == "__main__":
-    print(bot_battle.player_id)
     while True:
         game_info = bot_battle.get_game_info()
         move_controller(game_info.requested_move)
