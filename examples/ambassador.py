@@ -111,9 +111,26 @@ def challenge_response_handler():
 
 
 def discard_choice_handler():
-    bot_battle.play_discard_choice(0)
+    primary_action = game_info.history[-1][ActionType.PrimaryAction]
+    if primary_action.action == PrimaryAction.Exchange and primary_action.successful:
+        # We're in the ambassador move
+
+        # Note: on the first discard request after successful exchange, this should return 2 new cards
+        print(game_info.own_cards, flush = True)
+
+        bot_battle.play_discard_choice(0)
+
+    else:
+        bot_battle.play_discard_choice(0)
 
 
+first_round = True
 while True:
     game_info = bot_battle.get_game_info()
+
+    # Easier debugging
+    if first_round:
+        print(f"My player id is {game_info.player_id}", flush = True)
+        first_round = False
+
     move_controller(game_info.requested_move)
