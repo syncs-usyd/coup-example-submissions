@@ -49,12 +49,12 @@ def primary_action_handler():
 
 # We are evil
 def counter_action_handler():
-    primary_action = game_info.history[-1][ActionType.PrimaryAction]
+    primary_action = game_info.history[-1][ActionType.PrimaryAction].action
 
     if primary_action == PrimaryAction.ForeignAid:
         bot_battle.play_counter_action(CounterAction.BlockForeignAid)
     else:
-        bot_battle.play_challenge_action(CounterAction.NoCounterAction)
+        bot_battle.play_counter_action(CounterAction.NoCounterAction)
 
 
 def challenge_action_handler():

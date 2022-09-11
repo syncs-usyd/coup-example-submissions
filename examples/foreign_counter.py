@@ -46,7 +46,7 @@ def primary_action_handler():
 
 
 def counter_action_handler():
-    primary_action = game_info.history[-1][ActionType.PrimaryAction]
+    primary_action = game_info.history[-1][ActionType.PrimaryAction].action
 
     if primary_action == PrimaryAction.ForeignAid:
         bot_battle.play_counter_action(CounterAction.BlockForeignAid)
