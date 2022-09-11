@@ -48,6 +48,7 @@ def primary_action_handler():
 # Launches a counter action depending on what the last primary action was
 # This tests whether reading the history is functional and whether counter
 def counter_action_handler():
+    global is_last_counter_block_as_cap
     primary_action = game_info.history[-1][ActionType.PrimaryAction].action
 
     if primary_action == PrimaryAction.Assassinate:
